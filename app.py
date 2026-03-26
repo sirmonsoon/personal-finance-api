@@ -38,5 +38,22 @@ def userInput():
 def outputTransactions():
     return jsonify(transactions)
 
+# User GET request for transaction by Id.
+@app.route('/transactions/<int:id>', methods=['GET'])
+def outputTransactionsByID(id):
+    for transaction in transactions:
+        if transaction["id"] == id:
+            return jsonify(transaction)
+    return jsonify({"Error": "ID not found"}), 404
+
+# User DELETE request for deleting transactions.abs
+@app.route('/transactions/<int:id>', methods=['DELETE'])
+def delTransactionsByID(id):
+    for transaction in transactions:
+        if transaction["id"] == id:
+            transactions.remove(transaction)
+            return jsonify({"message": "Successfully deleted"})
+    return jsonify({"Error": "ID not found"}), 404
+
 if __name__ == "__main__":
     app.run(debug=False, use_reloader=False)

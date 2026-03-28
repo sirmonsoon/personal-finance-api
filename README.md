@@ -6,11 +6,11 @@ A simple RESTful API built with Flask that allows users to create, retrieve, and
 
 ## Features
 
-- Create a transaction (`POST /transactions`)
-- Retrieve all transactions (`GET /transactions`)
-- Retrieve a transaction by ID (`GET /transactions/<id>`)
-- Delete a transaction by ID (`DELETE /transactions/<id>`)
-- In-memory data storage for quick prototyping
+- Create transactions (POST /transactions)
+- Get all transactions (GET /transactions)
+- Get transaction by ID (GET /transactions/<id>)
+- Update transaction (PUT /transactions/<id>)
+- Delete transaction (DELETE /transactions/<id>)
 
 ## Tech Stack
 

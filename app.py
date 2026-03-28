@@ -149,6 +149,27 @@ def changeTransactionInfoById(id):
     
     return jsonify({"message": "Transaction updated successfully."}), 200
 
+# GET summary function.
+@app.route('/summary', methods=['GET'])
+def getSummary():
+    con = get_db_connection()
+    
+    # Group rows by category.
+    data = con.execute(
+        'SELECT category, SUM(amount) FROM transactions GROUP BY category'
+    )
+    rows = data.fetchall()
+    # make empty result dictionary.
+    result = {}
+    # for each row.
+    for row in rows:
+        # make transaction summary dictionary from row values.
+        result[row[0]] = row[1]
+       
+    con.close()
+    return jsonify(result)    
+    
+
 # Database connection function.
 def get_db_connection():
    con = sqlite3.connect("finance.db")

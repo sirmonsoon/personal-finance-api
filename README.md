@@ -17,12 +17,20 @@ A simple RESTful API built with Flask that allows users to create, retrieve, and
 - Python
 - Flask
 - REST API design
+- SQLite
 - JSON request/response handling
 
 ## Setup Instructions
 
-### 1. Clone the repository
+## How to Run
+1. Clone repo
+2. Install dependencies
+3. Run app
 
-```bash
-git clone https://github.com/sirmonsoon/personal-finance-api.git
-cd personal-finance-api
+## Example Request
+POST /transactions
+{
+  "amount": 50,
+  "category": "food",
+  "transactionType": "expense"
+}

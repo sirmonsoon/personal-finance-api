@@ -71,19 +71,83 @@ def outputTransactions():
 # User GET request for transaction by Id.
 @app.route('/transactions/<int:id>', methods=['GET'])
 def outputTransactionsByID(id):
-    for transaction in transactions:
-        if transaction["id"] == id:
-            return jsonify(transaction)
-    return jsonify({"Error": "ID not found"}), 404
+    con = get_db_connection()
+    data = con.execute(
+        'SELECT id, amount, category, transactionType FROM transactions WHERE id = ?',
+        (id,)
+    )
+    result = data.fetchone()
+    
+    if result is None:
+        con.close()
+        return jsonify({"message": "Id not found."}), 404
+    
+    transaction = {
+        "id": result[0],
+        "amount": result[1],
+        "category": result[2],
+        "transactionType": result[3]
+    }
+    
+    con.close()
+    return jsonify(transaction)
 
 # User DELETE request for deleting transactions.
 @app.route('/transactions/<int:id>', methods=['DELETE'])
 def delTransactionsByID(id):
-    for transaction in transactions:
-        if transaction["id"] == id:
-            transactions.remove(transaction)
-            return jsonify({"message": "Successfully deleted"})
-    return jsonify({"Error": "ID not found"}), 404
+    con = get_db_connection()
+    data = con.execute(
+        'SELECT id, amount, category, transactionType FROM transactions WHERE id = ?',
+        (id,)
+    )
+    result = data.fetchone()
+    if result is None:
+        con.close()
+        return jsonify({"message": "Id not found."}), 404
+    # Delete row.
+    con.execute(
+        'DELETE FROM transactions WHERE id = ?',
+        (id,)
+    )
+    con.commit()
+    con.close()    
+    return jsonify({"message": "Transaction deleted successfully."}), 200
+
+@app.route('/transactions/<int:id>', methods=['PUT'])
+def changeTransactionInfoById(id):
+    # Check if row exists.
+    data = request.get_json()
+    if data is None:
+        return jsonify({"error": "Missing required data field."}), 400
+    # Parse new data.
+    amount = data.get("amount")
+    category = data.get("category")
+    transaction_type = data.get("transactionType")
+    # Check if any data is missing.
+    if amount is None or category is None or transaction_type is None:
+        return jsonify({"error": "Missing data field."}), 400
+    
+    con = get_db_connection()
+    # Check if row exists.
+    check = con.execute(
+        'SELECT id, amount, category, transactionType FROM transactions WHERE id = ?',
+        (id,)
+    )
+    # Get row.
+    result = check.fetchone()
+    # Check if row is empty.
+    if result is None:
+        con.close()
+        return jsonify({"error": "Could not update."}), 404
+    # Update row.
+    con.execute(
+        'UPDATE transactions SET amount = ?, category = ?, transactionType = ? WHERE id = ?',
+        (amount, category, transaction_type, id)
+    )
+    con.commit()
+    con.close()
+    
+    return jsonify({"message": "Transaction updated successfully."}), 200
 
 # Database connection function.
 def get_db_connection():

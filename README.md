@@ -35,3 +35,9 @@ POST /transactions
   "category": "food",
   "transactionType": "expense"
 }
+
+## Example Summary
+GET /summary
+Response:
+<img width="188" height="135" alt="image" src="https://github.com/user-attachments/assets/9e942be9-e64e-43a9-99a9-2567a6d2a276" />
+

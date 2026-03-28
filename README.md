@@ -11,6 +11,7 @@ A simple RESTful API built with Flask that allows users to create, retrieve, and
 - Get transaction by ID (GET /transactions/<id>)
 - Update transaction (PUT /transactions/<id>)
 - Delete transaction (DELETE /transactions/<id>)
+- Get category summmary (GET /summary)
 
 ## Tech Stack
 

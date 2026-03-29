@@ -6,12 +6,12 @@ A REST API built with flask and SQLite to manage personal transactions.
 
 ## Features
 
-- Create transactions (POST /transactions)
-- Get all transactions (GET /transactions)
-- Get transaction by ID (GET /transactions/<id>)
-- Update transaction (PUT /transactions/<id>)
-- Delete transaction (DELETE /transactions/<id>)
-- Get category summmary (GET /summary)
+- Create transactions -> (POST /transactions)
+- Get all transactions -> (GET /transactions)
+- Get transaction by Id -> (GET /transactions/<id>)
+- Update transaction by Id -> (PUT /transactions/<id>)
+- Delete transaction by Id -> (DELETE /transactions/<id>)
+- Get spending summmary by category -> (GET /summary)
 
 ## Tech Stack
 

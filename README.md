@@ -36,6 +36,13 @@ POST /transactions
   "transactionType": "expense"
 }
 
+## Example Get Transactions
+GET /transactions
+
+<img width="269" height="510" alt="image" src="https://github.com/user-attachments/assets/d7bbff25-221f-4237-8e43-5282a2c47cf9" />
+
+
+
 ## Example Summary
 GET /summary
 Response:

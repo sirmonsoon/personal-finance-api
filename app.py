@@ -174,7 +174,7 @@ def getSummary():
     # The query also sums up the "amount" section from each corresponding "category" column.
     # data is a pointer to the result set produced by the SQL query.
     data = con.execute(
-        'SELECT category, SUM(amount) FROM transactions GROUP BY category'
+        'SELECT category, SUM(amount) AS total FROM transactions GROUP BY category'
     )
     # Execute query and return a cursor pointing to the result set.
     # rows is a set of tuples: [ ("food", 120), ("rent", 1000), ("entertainment", 60) ]

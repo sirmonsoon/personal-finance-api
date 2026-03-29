@@ -2,7 +2,7 @@
 
 > Built as part of my effort to strengthen backend engineering fundamentals and reduce reliance on AI by implementing core concepts from scratch.
 
-A simple RESTful API built with Flask that allows users to create, retrieve, and delete financial transactions.
+A REST API built with flask and SQLite to manage personal transactions.
 
 ## Features
 
